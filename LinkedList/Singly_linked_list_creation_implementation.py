@@ -17,6 +17,26 @@ class LinkedList:
             temp = temp.next
         print(linked_list)
 
+    def insertNode(self, val, pos):
+        target = Node(val)
+        if pos == 0:
+            target.next = self.head
+            return
+
+        def gerPrev(pos):
+            temp = self.head
+            count = 1
+            while count < pos:
+                temp = temp.next
+                count += 1
+            return temp
+
+        prev = gerPrev(pos)
+        nextNode = prev.next
+
+        prev.next = target
+        target.next = nextNode
+
 
 # Node structure 5=> 1 => 3 => 7
 
@@ -31,4 +51,6 @@ linked_list.head.next = second_node
 second_node.next = third_node
 third_node.next = fourth_node
 
+
+linked_list.insertNode(2, 2)
 linked_list.printList()
