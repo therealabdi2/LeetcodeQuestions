@@ -38,6 +38,58 @@ class LinkedList:
 
         print(linked_list)
 
+    def countList(self):
+        temp = self.head
+        count = 0
+        while temp is not None:
+            temp = temp.next
+            count += 1
+        return count
+
+    # we will consider the index starts at 1
+    def insertAtLocation(self, value, index):
+        temp = self.head
+
+        count = self.countList()
+
+        # sees if the pos we want to insert a node in is not valid
+        # index  is 6, count is 5, valid
+        # index is 7 count is 5, invalid cant have 5 elements in the node and then we wanna insert at pos8
+        if count + 1 < index:
+            return temp
+
+        newNode = Node(value)
+
+        # head
+        if index == 1:
+            newNode.next = temp
+            temp.prev = newNode
+            self.head = newNode
+            return self.head
+
+        # tail
+        if index == count + 1:
+            while temp.next is not None:
+                temp = temp.next
+
+            temp.next = newNode
+            newNode = temp
+            return self.head
+
+        i = 1
+        while i < index - 1:
+            temp = temp.next
+            i += 1
+
+        nodeAtTarget = temp.next
+        newNode.next = nodeAtTarget
+        nodeAtTarget = newNode
+
+        temp.next = newNode
+        newNode.prev = temp
+
+        return self.head
+
 
 arr = [1, 2, 3, 4, 5]
 
@@ -45,4 +97,5 @@ llist = LinkedList()
 
 llist.createList(arr)
 
+llist.insertAtLocation(6, 6)
 llist.printList()
