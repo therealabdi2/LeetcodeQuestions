@@ -90,6 +90,40 @@ class LinkedList:
 
         return self.head
 
+    def deleteAtLocation(self, index):
+        temp = self.head
+
+        count = self.countList()
+
+        if count < index:
+            return temp
+
+        if index == 1:
+            temp = temp.next
+            self.head = temp
+            return self.head
+
+        if count == index:
+            # get 2nd to last node
+            while temp.next is not None and temp.next.next is not None:
+                temp = temp.next
+            temp.next = None
+            return self.head
+
+        i = 1
+        while i < index - 1:
+            temp = temp.next
+            i += 1
+
+        prevNode = temp
+        nodeAtTarget = temp.next  # or prevNode.next
+        nextNode = nodeAtTarget.next
+
+        nextNode.prev = prevNode
+        prevNode.next = nextNode
+
+        return self.head
+
 
 arr = [1, 2, 3, 4, 5]
 
@@ -97,5 +131,7 @@ llist = LinkedList()
 
 llist.createList(arr)
 
-llist.insertAtLocation(6, 6)
+# llist.insertAtLocation(6, 6)
+
+llist.deleteAtLocation(2)
 llist.printList()
