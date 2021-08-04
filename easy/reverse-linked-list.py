@@ -27,10 +27,9 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        next = head
         helper = None
 
-        while next:
+        while head:
             next = head.next
             head.next = helper
             helper = head
