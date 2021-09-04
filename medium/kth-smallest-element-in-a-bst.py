@@ -30,7 +30,7 @@ class Solution:
             return
         if node is not None:
             self.inorder(node.left, arr)
-            arr.append(node.val)
+            arr.append(node.st)
             self.inorder(node.right, arr)
 
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
