@@ -49,7 +49,7 @@ class Solution:
                     q.append(f.left)
                 if f.right:
                     q.append(f.right)
-            if len(temp)>0:
+            if len(temp) > 0:
                 ans.append(temp[:])
                 temp.clear()
         return ans
