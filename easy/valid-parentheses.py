@@ -32,17 +32,22 @@ Output: true
 
 class Solution(object):
     def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        stack = ['N']
-        m = {')': '(', ']': '[', '}': '{'}
-        for i in s:
-            if i in m.keys():
-                if stack.pop() != m[i]:
+        stack = []
+        # we are mapping the closing parenthesis with its opening parenthesis
+        close_to_open = {
+            ")": "(",
+            "]": "[",
+            "}": "{"
+        }
+        for char in s:
+            # that means its a closing parenthesis
+            if char in close_to_open:
+                if stack and stack[-1] == close_to_open[char]:  # should be matching our map
+                    stack.pop()
+                else:
                     return False
             else:
-                stack.append(i)
+                # if we get an open parenthesis we add it to our stack
+                stack.append(char)
 
-        return len(stack) == 1
+        return True if not stack else False
