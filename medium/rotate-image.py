@@ -63,5 +63,25 @@ class Solution:
         print(matrix)
 
 
+class Solution2:
+    '''
+    clockwise rotate
+    first reverse up to down, then swap the symmetry
+    1 2 3     7 8 9     7 4 1
+    4 5 6  => 4 5 6  => 8 5 2
+    7 8 9     1 2 3     9 6 3
+    '''
+
+    def rotate(self, matrix):
+        matrix.reverse()
+        for i in range(len(matrix)):
+            for j in range(i):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+        print(matrix)
+
+
 s = Solution()
 s.rotate([[5, 1, 9, 11], [2, 4, 8, 10], [13, 3, 6, 7], [15, 14, 12, 16]])
+
+s2 = Solution2()
+s2.rotate([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
