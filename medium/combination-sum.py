@@ -1,8 +1,13 @@
-'''Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
+'''
+Given an array of distinct integers candidates and a target integer target,
+return a list of all unique combinations of candidates where the chosen numbers sum to target.
+You may return the combinations in any order.
 
-The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
+The same number may be chosen from candidates an unlimited number of times.
+Two combinations are unique if the frequency of at least one of the chosen numbers is different.
 
-It is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
+It is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations
+for the given input.
 
  
 
@@ -29,28 +34,33 @@ Output: [[1]]
 Example 5:
 
 Input: candidates = [1], target = 2
-Output: [[1,1]]'''
+Output: [[1,1]]
+'''
 from typing import List
 
 
 class Solution:
-    def solution(self, candidates, ans, cur, target, index, sum):
-        if sum == target:
-            ans.append(cur[:])
-
-        elif sum < target:
-            n = len(candidates)
-            for i in range(index, n):
-                cur.append(candidates[i])
-                self.solution(candidates, ans, cur, target, i, sum + candidates[i])
-                cur.pop()
-        return
-
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        ans = []
-        cur = []
-        self.solution(candidates, ans, cur, target, 0, 0)
-        return ans
+        res = []
+
+        def dfs(i, cur, total):
+            # i determines which candidate we are allowed to choose
+            # cur stores what combination of candidates we have so far
+            # total stores total sum, it is used to check if we have reached target sum
+            if total == target:
+                res.append(cur.copy())
+                return
+            if i >= len(candidates) or total > target:
+                # means no combination was found and we return
+                return
+
+            cur.append(candidates[i])
+            dfs(i, cur, total + candidates[i])
+            cur.pop()
+            dfs(i + 1, cur, total)
+
+        dfs(0, [], 0)
+        return res
 
 
 s = Solution()
