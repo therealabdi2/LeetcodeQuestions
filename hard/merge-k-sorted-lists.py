@@ -26,7 +26,7 @@ Input: lists = [[]]
 Output: []'''
 
 # Definition for singly-linked list.
-from typing import List
+from typing import List, Optional
 
 
 class ListNode:
@@ -36,47 +36,42 @@ class ListNode:
 
 
 class Solution:
-
-    def mergeTwoLists(self, l1, l2):
-        cur = ListNode(0)
-        ans = cur
-
-        while l1 and l2:
-            if l1.val > l2.val:
-                cur.next = l2
-                l2 = l2.next
-
-            else:
-                cur.next = l1
-                l1 = l1.next
-            cur = cur.next
-
-        while l1:
-            cur.next = l1
-            l1 = l1.next
-            cur = cur.next
-        while l2:
-            cur.next = l2
-            l2 = l2.next
-            cur = cur.next
-        return ans.next
-
-    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
-        if len(lists) == 0:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        if not lists or len(lists) == 0:
             return None
 
-        i = 0
-        last = len(lists) - 1
-        j = last
+        # We will take pairs of linked lists and merging them each time
+        # keep doing this till there is only one linked list remaining
+        while len(lists) > 1:
+            merged_list = []
 
-        while last != 0:
-            i = 0
-            j = last
-
-            while j > i:
-                lists[i] = self.mergeTwoLists(lists[i], lists[j])
-                i += 1
-                j -= 1
-                last = j
-
+            # we need to do pairs so we inc by 2
+            for i in range(0, len(lists), 2):
+                l1 = lists[i]
+                # l2 could be out of bounds so care for that
+                l2 = lists[i + 1] if (i + 1) < len(lists) else None
+                merged_list.append(self.mergeList(l1, l2))
+            lists = merged_list
         return lists[0]
+
+    def mergeList(self, l1, l2):
+        dummy = ListNode()
+        tail = dummy
+
+        while l1 and l2:
+            if l1.val < l2.val:
+                tail.next = l1
+                l1 = l1.next
+            else:
+                tail.next = l2
+                l2 = l2.next
+            tail = tail.next
+
+        if l1:
+            tail.next = l1
+        else:
+            tail.next = l2
+
+        return dummy.next
+
+
