@@ -1,6 +1,9 @@
-"""Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+"""
+Given an array of strings strs, group the anagrams together.
+You can return the answer in any order.
 
-An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase,
+typically using all the original letters exactly once.
 
 
 
@@ -15,7 +18,8 @@ Output: [[""]]
 Example 3:
 
 Input: strs = ["a"]
-Output: [["a"]]"""
+Output: [["a"]]
+"""
 import collections
 from typing import List
 
@@ -25,11 +29,10 @@ class Solution:
         return ''.join(sorted(s))
 
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        answers = []
         m = {}
 
         for s in strs:
-            hashed = self.findHash(s)  # returs a sorted version of our string s
+            hashed = self.findHash(s)  # returns a sorted version of our string s
             if hashed not in m:
                 m[hashed] = []
             m[hashed].append(s)
@@ -49,6 +52,26 @@ class Solution2(object):
             m[sorted_str].append(str)
 
         return list(m.values())
+
+
+class Solution3:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        res = collections.defaultdict(list)  # mapping the char count of each input string to the list of anagrams
+
+        for s in strs:
+            count = [0] * 26  # a..z
+
+            for c in s:
+                # get the ascii values of char e.g a - a =0 so it will be stored in 1st cell
+                count[ord(c) - ord('a')] += 1
+
+            # our count is a list but in python lists can not be keys
+            # so we change it to a tuple because tuples are non mutable
+            res[tuple(count)].append(s)
+
+        return res.values()
+
+    # time complexity O(m * n) where m is the number of strings given and n is he average length of each string
 
 
 s = Solution()
