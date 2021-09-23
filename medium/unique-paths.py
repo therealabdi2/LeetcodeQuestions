@@ -50,5 +50,33 @@ class Solution:
         return dp[-1][-1]
 
 
+class Solution2:
+    def uniquePaths(self, m: int, n: int) -> int:
+        # in this solution we go through all cells and check how many unique paths to the end
+        # can we get from a specific cell, e.g from bottom row there is only 1 unique path for every cell
+        # because it can only move right from that point
+        # same goes for the right most column as all the cells can only move down hence only 1 unique path
+
+        # since we alreayd know the bottom row will be all 1's so we dont need to compute it
+        row = [1] * n
+
+        # go through all the rows except last row
+        for i in range(m - 1):
+            new_row = [1] * n
+
+            # to avoid the edge case to check for out of bounds, go thorough all the columns except
+            # right most column because like bottom row, it too is always gonna be 1
+            for j in range(n - 2, -1, -1):
+                # new_row[j+1] is the right value and the value below is the old row at index j
+                new_row[j] = new_row[j + 1] + row[j]
+            row = new_row
+
+        return row[0]
+
+
 s = Solution()
 print(s.uniquePaths(m=3, n=7))
+
+s2 = Solution2()
+print(s2.uniquePaths(m=3, n=7))
+
