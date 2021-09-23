@@ -33,3 +33,24 @@ class Solution:
         for step in range(2, n):
             dp[step] = dp[step - 1] + dp[step - 2]
         return dp[-1]
+
+
+class Solution2:
+    def climbStairs(self, n: int) -> int:
+        # we are actually starting from the last stair case and working our way backwards
+        one, two = 1, 1
+
+        for i in range(n - 1):
+            # temp = one
+            # one = one + two
+            # two = temp
+            one, two = one + two, one
+
+        return one
+
+
+s = Solution()
+print(s.climbStairs(5))
+
+s2 = Solution2()
+print(s2.climbStairs(5))
