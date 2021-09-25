@@ -1,4 +1,7 @@
-"""Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+"""
+Given two strings s and t of lengths m and n respectively,
+return the minimum window substring of s such that every character in t (including duplicates)
+is included in the window. If there is no such substring, return the empty string "".
 
 The testcases will be generated such that the answer is unique.
 
@@ -21,65 +24,49 @@ Example 3:
 Input: s = "a", t = "aa"
 Output: ""
 Explanation: Both 'a's from t must be included in the window.
-Since the largest window of s only has one 'a', return empty string."""
+Since the largest window of s only has one 'a', return empty string."
+"""
 
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        len1 = len(s)
-        len2 = len(t)
-
-        if (len1 < len2):
+        if t == "":
             return ""
 
-        hashPat = {}
-        hashStr = {}
+        count_t, window = {}, {}
 
-        for i in range(0, len2):
-            if (hashPat.get(t[i]) is None):
-                hashPat[t[i]] = 0
-            hashPat[t[i]] += 1
+        for c in t:
+            count_t[c] = 1 + count_t.get(c, 0)  # if c does not exist it will return 0
 
-        count = 0
-        left = 0
-        startIndex = -1
-        minLen = float("inf")
+        have, need = 0, len(count_t)
+        res, res_len = [-1, -1], float("infinity")
+        l = 0  # left pointer
 
-        for right in range(0, len1):
+        # r will tell the right boundary of our current window
+        for r in range(len(s)):
+            c = s[r]
+            window[c] = 1 + window.get(c, 0)
 
-            if (hashStr.get(s[right]) is None):
-                hashStr[s[right]] = 0
-            hashStr[s[right]] += 1
-            if (hashPat.get(s[right]) is None):
-                hashPat[s[right]] = 0
-            if (
+            if c in count_t and window[c] == count_t[c]:
+                have += 1
 
-                    hashPat.get(s[right]) != 0 and
-                    hashStr.get(s[right]) <= hashPat.get(s[right])
-            ):
-                count += 1  # keep incrementing the count if string hash is less then pattern hash
-            # count==len2 means a window is found that contains all character of pattern string
-            if (count == len2):
+            while have == need:
+                # update our result if we have found potential sub str
+                if (r - l + 1) < res_len:
+                    res = [l, r]
+                    res_len = r - l + 1
 
-                if (hashStr.get(s[left]) is None):
-                    hashStr[s[right]] = 0
-                if (hashPat.get(s[left]) is None):
-                    hashPat[s[right]] = 0
-                while (
-                        hashStr.get(s[left]) > hashPat.get(s[left]) or
-                        hashPat.get(s[left]) == 0
-                ):
-                    # minimizing the windows range from left side
+                # while the condition is being met we need to keep shrinking the string
+                # because we need the smallest sub str
+                # so pop from the left of our window
+                window[s[l]] -= 1
+                if s[l] in count_t and window[s[l]] < count_t[s[l]]:
+                    have -= 1
+                l += 1
 
-                    if (hashStr.get(s[left]) > hashPat.get(s[left])):
-                        hashStr[s[left]] -= 1
-                    left += 1  # incrementing the left pointer
+        l, r = res
+        return s[l:r + 1] if res_len != float("infinity") else ""
 
-                windowLen = right - left + 1  # calculating the windows length
-                if (minLen > windowLen):
-                    minLen = windowLen
-                    startIndex = left
 
-        if (startIndex == -1):
-            return ""
-        return s[startIndex:startIndex + minLen]
+s = Solution()
+print(s.minWindow(s="ADOBECODEBANC", t="ABC"))
