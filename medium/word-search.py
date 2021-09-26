@@ -1,6 +1,10 @@
-'''Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+'''
+iven an m x n grid of characters board and a string word,
+return true if word exists in the grid.
 
-The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+The word can be constructed from letters of sequentially adjacent cells,
+where adjacent cells are horizontally or vertically neighboring.
+The same letter cell may not be used more than once.
 
 
 
@@ -63,7 +67,42 @@ class Solution:
         return False
 
 
-s = Solution()
+class Solution2:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        ROWS, COLS = len(board), len(board[0])
+
+        # we use a set because we can not reuse variables
+        path = set()
+
+        # r and c will be current position i would be current word
+        def dfs(r, c, i):
+            if i == len(word):
+                return True
+
+            # for out of bounds
+            # word we are looking for isn't the word in board
+            # the word already exists in our path (r,c)
+            if r < 0 or c < 0 or r >= ROWS or c >= COLS or word[i] != board[r][c] or (r, c) in path:
+                return False
+            # this condition is reached only when we find the character we are looking for
+            path.add((r, c))
+            # we are running dfs on all four adjacent cells
+            # if any returns true then our result will return true
+            res = dfs(r + 1, c, i + 1) or dfs(r - 1, c, i + 1) or dfs(r, c + 1, i + 1) or dfs(r, c - 1, i + 1)
+            path.remove((r, c))
+            return res
+
+        # we will go through the whole board
+        for r in range(ROWS):
+            for c in range(COLS):
+                if dfs(r, c, 0):
+                    return True
+        return False
+
+    # time O(n * m * 4^n)
+
+
+s = Solution2()
 board = [["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]]
 word = "SEE"
 print(s.exist(board, word))
