@@ -20,6 +20,7 @@ Output: []
 '''
 
 # Definition for a binary tree node.
+import collections
 from collections import deque
 from typing import Optional, List
 
@@ -33,23 +34,29 @@ class TreeNode:
 
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        ans = []
+        res = []
         if root is None:
-            return ans
+            return res
 
-        q = deque([root])
+        q = collections.deque()
+        q.append(root)
+
         while q:
-            n = len(q)
-            temp = []  # this will act as current lvl array
+            # this len will make sure we go through one level at a time
+            q_len = len(q)
+            # we will add this list to our result
+            level = []
+            for i in range(q_len):
+                # first in first out
+                node = q.popleft()
+                if node:
+                    level.append(node.val)
+                    # the children can be null that's why we've got the if statement
+                    q.append(node.left)
+                    q.append(node.right)
 
-            for i in range(0, n):
-                f = q.popleft()
-                temp.append(f.val)
-                if f.left:
-                    q.append(f.left)
-                if f.right:
-                    q.append(f.right)
-            if len(temp) > 0:
-                ans.append(temp[:])
-                temp.clear()
-        return ans
+            # our queue can have null nodes so we dont wanna add them
+            if level:
+                res.append(level)
+
+        return res
