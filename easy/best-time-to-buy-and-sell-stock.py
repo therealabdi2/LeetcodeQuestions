@@ -36,3 +36,24 @@ class Solution:
                 # then we try our luck and get profits by selling
                 profit = max(profit, price - buy_price)
         return profit
+
+
+class Solution2:
+    def maxProfit(self, prices: List[int]) -> int:
+        # sliding window technique
+        profit = 0
+        l, r = 0, 1  # left = buy right=sell
+
+        while r < len(prices):
+            # now we need to check if this is a profitable transaction
+            if prices[l] < prices[r]:
+                profit = max(profit, prices[r] - prices[l])
+            else:
+                # if it reaches here then we have actually found the lowest current point
+                l = r
+            r += 1
+        return profit
+
+
+s = Solution2()
+print(s.maxProfit(prices=[7, 1, 5, 3, 6, 4]))
