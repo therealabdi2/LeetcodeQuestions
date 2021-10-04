@@ -24,8 +24,8 @@ Output: 42
 Explanation: The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.
 '''
 
-
 # Definition for a binary tree node.
+from typing import Optional
 
 
 class TreeNode:
@@ -52,3 +52,30 @@ class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
         self.solution(root)
         return self.ans
+
+
+class Solution2:
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        res = [root.val]
+
+        # return max path sum without splitting
+        def dfs(root):
+            if not root:
+                return 0
+
+            leftMax = dfs(root.left)
+            rightMax = dfs(root.right)
+
+            # we dont wanna add -ve numbers so just take zero if -ve
+            leftMax = max(leftMax, 0)
+            rightMax = max(rightMax, 0)
+
+            # compute max sum path WITH splitting
+            res[0] = max(res[0], root.val + leftMax + rightMax)
+
+            # cant chose both because then that means we are splitting
+            # here we take the max path without split
+            return root.val + max(leftMax, rightMax)
+
+        dfs(root)
+        return res[0]
