@@ -102,7 +102,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 <!-- CONTACT -->
-## Contact
+## Contact Me
 
 Abdurrehman Afridi - [@therealabdi27](https://twitter.com/therealabdi26) - abdurrehman.afridi.5@gmail.com
 
