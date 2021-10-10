@@ -1,6 +1,10 @@
-'''Given head, the head of a linked list, determine if the linked list has a cycle in it.
+'''
+Given head, the head of a linked list, determine if the linked list has a cycle in it.
 
-There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+There is a cycle in a linked list if there is some node in the list that
+can be reached again by continuously following the next pointer.
+Internally, pos is used to denote the index of the node that tail's next pointer is connected to.
+Note that pos is not passed as a parameter.
 
 Return true if there is a cycle in the linked list. Otherwise, return false.
 
@@ -38,14 +42,14 @@ class ListNode:
 
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
-        hare = head
-        turtle = head
-        # we move the turtle one step at a time but hare 2 steps
-        # if its a cycle the turtle and hare will eventually equal eachother
-        while head and hare and hare.next:
-            hare = hare.next.next
-            head = head.next
-            if hare == head:
-                return True
+        # o(n) where n is the length of the nodes
+        hare, turtle = head, head
 
+        # we move the turtle one step at a time but hare 2 steps
+        # if its a cycle the turtle and hare will eventually equal another
+        while hare and hare.next:
+            turtle = turtle.next
+            hare = hare.next.next
+            if hare == turtle:
+                return True
         return False
