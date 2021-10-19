@@ -106,7 +106,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Abdurrehman Afridi - [@therealabdi27](https://twitter.com/therealabdi26) - abdurrehman.afridi.5@gmail.com
 
-Project Link: [https://github.com/therealabdi2/LeetcodeQuestions]https://github.com/therealabdi2/LeetcodeQuestions)
 
 
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
