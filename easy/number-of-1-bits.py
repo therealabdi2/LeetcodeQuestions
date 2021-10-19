@@ -22,7 +22,7 @@ Explanation: The input binary string 11111111111111111111111111111101 has a tota
 
 
 class Solution:
-    # time O(32) -> O(1)
+    # time O(32) -> which can be written as O(1)
     # the downside is it has to look at every bit even the ones that arent 1's e.g 1000001 will look at all 0 too
     # which wastes time
     def hammingWeight(self, n: int) -> int:
