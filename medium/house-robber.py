@@ -1,7 +1,12 @@
 '''
-You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+You are a professional robber planning to rob houses along a street.
+Each house has a certain amount of money stashed,
+the only constraint stopping you from robbing each of them is that
+adjacent houses have security systems connected and i
+t will automatically contact the police if two adjacent houses were broken into on the same night.
 
-Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+Given an integer array nums representing the amount of money of each house, r
+eturn the maximum amount of money you can rob tonight without alerting the police.
 
 
 
@@ -25,7 +30,7 @@ class Solution:
     def rob(self, nums: List[int]) -> int:
         n = len(nums)
 
-        if n is 0:
+        if n == 0:
             return 0
 
         dp = [0] * n  # this will store the maximum money we can steal upto a specific house
@@ -41,3 +46,24 @@ class Solution:
 
         # the last pos in the array contains max amount we can steal
         return dp[-1]
+
+
+class Solution2:
+    def rob(self, nums: List[int]) -> int:
+        rob1, rob2 = 0, 0
+
+        for n in nums:
+            # now we need to compute the max we can rob up until n
+            # rob2 is the last house we robbed, rob1 was the one before that
+            # [rob1, rob2, n, n+1, ...] so if we want to rob n we have to rob rob1 as well
+            # but if we are robbing rob2 we cant include n because its right next to it
+            # so when we get to n+1 we update rob1 to equal rob2
+            temp = max(n + rob1, rob2)
+            rob1 = rob2
+            rob2 = temp
+        # by the end rob2 will be equal to the max value
+        return rob2
+
+
+s = Solution2()
+print(s.rob([2, 7, 9, 3, 1]))
