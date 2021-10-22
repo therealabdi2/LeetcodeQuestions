@@ -1,4 +1,5 @@
-'''Given the head of a singly linked list, reverse the list, and return the reversed list.
+'''
+Given the head of a singly linked list, reverse the list, and return the reversed list.
 
 
 
@@ -35,3 +36,31 @@ class Solution:
             helper = head
             head = next
         return helper
+
+
+class Solution2:
+    def reverseList(self, head: ListNode) -> ListNode:
+        # time O(n) memory (1)
+        prev, curr = None, head
+
+        while curr:
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+        return prev
+
+
+class Solution3:
+    def reverseList(self, head: ListNode) -> ListNode:
+        # time O(n) memory (n)
+
+        if not head:
+            return None
+
+        new_head = head
+        if head.next:
+            new_head = self.reverseList(head.next)
+            head.next.next = head
+        head.next = None
+        return new_head
