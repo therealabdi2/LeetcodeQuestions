@@ -1,4 +1,7 @@
-"""Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+"""
+Given an integer array nums,
+return true if any value appears at least twice in the array,
+and return false if every element is distinct.
 
 
 
@@ -31,5 +34,16 @@ class Solution:
         return False
 
 
-s = Solution()
-print(s.containsDuplicate([1, 2, 3, 4, ]))
+class Solution2:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        hash_set = set()
+
+        for n in nums:
+            if n in hash_set:
+                return True
+            hash_set.add(n)
+        return False
+
+
+s = Solution2()
+print(s.containsDuplicate([1, 2, 3, 4, 1]))
