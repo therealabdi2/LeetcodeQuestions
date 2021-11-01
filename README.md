@@ -49,7 +49,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a repo where I have implemented Leetcode questions used in interviews in Pyhton.
+This is a repo where I have implemented Leetcode questions used in interviews in Pyhton
 
 ### Built With
 * [Python](https://www.python.org/)
