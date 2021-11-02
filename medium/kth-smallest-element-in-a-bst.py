@@ -1,4 +1,6 @@
-'''iven the root of a binary search tree, and an integer k, return the kth (1-indexed) smallest element in the tree.
+'''
+Given the root of a binary search tree, and an integer k,
+return the kth (1-indexed) smallest element in the tree.
 
 
 
@@ -30,19 +32,36 @@ class Solution:
             return
         if node is not None:
             self.inorder(node.left, arr)
-            arr.append(node.st)
+            arr.append(node.val)
             self.inorder(node.right, arr)
 
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         arr = []
         self.inorder(root, arr)
-        return arr[k-1]
+        return arr[k - 1]
 
+
+class Solution2:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        n = 0
+        stack = []
+        cur = root
+        while cur or stack:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+
+            cur = stack.pop()
+            n += 1
+            if n == k:
+                return cur.val
+            cur = cur.right
 
 
 def main1(root):
-    s = Solution()
+    s = Solution2()
     k_small = s.kthSmallest(root, 3)
+    print(k_small)
 
 
 if __name__ == '__main__':
