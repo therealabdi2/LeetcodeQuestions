@@ -82,7 +82,7 @@ To check go to terminal and type
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/therealabdi2/LeetcodeQuestions/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/therealabdi2/LeetcodeQuestions/issues) for a list of proposed features (and known issues)
 
 <!-- CONTRIBUTING -->
 ## Contributing
