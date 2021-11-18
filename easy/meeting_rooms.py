@@ -18,6 +18,7 @@ Explanation:
 Two times will not conflict
 '''
 
+
 # Definition of Interval.
 class Interval(object):
     def __init__(self, start, end):
@@ -30,13 +31,14 @@ class Solution:
     @param intervals: an array of meeting time intervals
     @return: if a person could attend all meetings
     """
+
     def canAttendMeetings(self, intervals):
         # Write your code here
         # time complexity O(nlogn) because we sorting,
         intervals.sort(key=lambda i: i.start)
 
         for i in range(1, len(intervals)):
-            i1 = intervals[i-1]
+            i1 = intervals[i - 1]
             i2 = intervals[i]
 
             if i1.end > i2.start:
@@ -44,3 +46,6 @@ class Solution:
         return True
 
 
+s = Solution()
+intervals = [Interval(0, 30), Interval(5, 10), Interval(15, 20)]
+print(s.canAttendMeetings(intervals))
