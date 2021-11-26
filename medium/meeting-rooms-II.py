@@ -51,3 +51,8 @@ class Solution:
                 count -= 1
             res = max(res, count)
         return res
+
+
+s = Solution()
+intervals = [Interval(0, 30), Interval(5, 10), Interval(15, 20)]
+print(s.minMeetingRooms(intervals))
