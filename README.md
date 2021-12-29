@@ -11,7 +11,7 @@
 
  <p align="center">
     LeetCode Questions implemented in Python
-  **********************************************
+ 
     <br />
     <a href="https://github.com/therealabdi2/LeetcodeQuestions"><strong>Explore the docs »</strong></a>
     <br />
