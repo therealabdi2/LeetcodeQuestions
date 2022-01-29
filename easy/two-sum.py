@@ -1,6 +1,9 @@
-"""Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+"""
+Given an array of integers nums and an integer target,
+return indices of the two numbers such that they add up to target.
 
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
+You may assume that each input would have exactly one solution,
+and you may not use the same element twice.
 
 You can return the answer in any order.
 
@@ -20,6 +23,7 @@ Example 3:
 Input: nums = [3,3], target = 6
 Output: [0,1]
  """
+from typing import List
 
 
 class Solution(object):
@@ -31,7 +35,6 @@ class Solution(object):
         """
         m = {}
         for num in nums:
-
             goal = target - num
 
             if goal in m:
@@ -56,8 +59,29 @@ class Solution2(object):
             m[nums[i]] = i
 
 
+class Solution3:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        # time complexity: O(n)
+        # space complexity: O(n)
+        prev_map = {}  # every element that comes before the current element is gonna be stored in this map val:index
+
+        # we get the index and actual value of the element
+        for i, num in enumerate(nums):
+            diff = target - num
+
+            # we can check if the diff is already in the map
+            if diff in prev_map:
+                # we return the pair
+                return [prev_map[diff], i]
+            # if we dont find the solution then we need to update the map
+            prev_map[num] = i
+
+
 s = Solution()
 print(s.twoSum([3, 3, 4], target=6))
 
 s2 = Solution2()
 print(s.twoSum([3, 2, 4], target=6))
+
+s3 = Solution3()
+print(s.twoSum([3, 3], target=6))
