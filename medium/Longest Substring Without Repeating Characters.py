@@ -1,4 +1,5 @@
-"""Given a string s, find the length of the longest substring without repeating characters.
+"""
+Given a string s, find the length of the longest substring without repeating characters.
 
 
 
@@ -27,7 +28,8 @@ Output: 0
 Constraints:
 
 0 <= s.length <= 5 * 104
-s consists of English letters, digits, symbols and spaces."""
+s consists of English letters, digits, symbols and spaces.
+"""
 
 
 class Solution:
@@ -50,16 +52,20 @@ class Solution:
 
 class Solution2:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        # time complexity O(n)
+        # we get a set to store the characters we have seen
         char_set = set()
+        # we use sliding window technique
+        # our left pointer will be the beginning of the window and right will keep changing
         l = 0
-        res = 0  # will store the max len
+        res = 0  # will store the max len here
 
         # the right pointer will go through every single char
         for r in range(len(s)):
             # if we get to a duplicate char then we have to update our window and our set
             while s[r] in char_set:  # meaning the char is a duplicate
                 char_set.remove(s[l])  # removing the left most char
-                l += 1  # inc pointer
+                l += 1  # increment pointer
             char_set.add(s[r])  # after we remove duplicates we can add it to our set
             # at this point we know for sure there are no duplicates in the set so update result
             res = max(res, r - l + 1)
