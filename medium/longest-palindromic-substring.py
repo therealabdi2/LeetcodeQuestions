@@ -57,23 +57,31 @@ class Solution:
 
 class Solution2:
     def longestPalindrome(self, s: str) -> str:
+        # time complexity O(n^2)
+        # space complexity O(n^2)
+        # store the longest palindrome here
         res = ''
         res_len = 0  # longest length
 
         for i in range(len(s)):
             # for odd length palindromes e.g "babad" we are starting in the middle and expanding outwards
+            # these left and right pointer are equal to i which is our center currently
             l, r = i, i
             # while l and r are in bound and char at l and r are equal we know this is palindrome in these cases
             # so we can potentially update our result
             while l >= 0 and r < len(s) and s[l] == s[r]:
+                # we only add if it is longer than our current result
                 if r - l + 1 > res_len:
+                    # update result
                     res = s[l:r + 1]
+                    # update length
                     res_len = r - l + 1
                 # expand out our pointers
                 l -= 1
                 r += 1
 
             # for even length palindromes e.g "cbbd" we are starting in the middle and expanding outwards
+            # for this just set the right pointer to i + 1
             l, r = i, i + 1
             while l >= 0 and r < len(s) and s[l] == s[r]:
                 if r - l + 1 > res_len:
