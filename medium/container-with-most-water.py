@@ -36,9 +36,12 @@ import time
 
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        #Linear time O(n)
+        # Linear time O(n)
+
         start_time = time.time()
         res = 0
+
+        # we initialize this way because we want the width to be as big as possible
         l = 0
         r = len(height) - 1
 
