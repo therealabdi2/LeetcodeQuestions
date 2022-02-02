@@ -51,8 +51,10 @@ class Solution2(object):
         :type target: int
         :rtype: List[int]
         """
+        # time complexity O(n)
         m = {}
         for i in range(len(nums)):
+            # this is the value we need to look for in our hashmap
             goal = target - nums[i]
             if goal in m:
                 return [m[goal], i]
