@@ -1,5 +1,6 @@
 '''
-Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+Given a string s containing just the characters
+'(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 
 An input string is valid if:
 
@@ -42,6 +43,7 @@ class Solution(object):
         for char in s:
             # that means its a closing parenthesis
             if char in close_to_open:
+                # we check if stack is valid and top of stack is the opening
                 if stack and stack[-1] == close_to_open[char]:  # should be matching our map
                     stack.pop()
                 else:
@@ -50,4 +52,5 @@ class Solution(object):
                 # if we get an open parenthesis we add it to our stack
                 stack.append(char)
 
+        # if stack is empty then its valid
         return True if not stack else False
