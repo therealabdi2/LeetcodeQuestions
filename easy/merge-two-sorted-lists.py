@@ -1,4 +1,6 @@
-'''Merge two sorted linked lists and return it as a sorted list. The list should be made by splicing together the nodes of the first two lists.
+'''
+Merge two sorted linked lists and return it as a sorted list.
+The list should be made by splicing together the nodes of the first two lists.
 
 
 
@@ -14,7 +16,8 @@ Output: []
 Example 3:
 
 Input: l1 = [], l2 = [0]
-Output: [0]'''
+Output: [0]
+'''
 
 
 # Definition for singly-linked list.
@@ -26,6 +29,7 @@ class ListNode:
 
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        # this is our dummy node
         cur = ListNode(0)
         ans = cur
         while l1 and l2:
@@ -38,6 +42,7 @@ class Solution:
 
             cur = cur.next
 
+        # for cases where one of the lists is not empty
         if l1:
             cur.next = l1
         else:
