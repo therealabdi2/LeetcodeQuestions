@@ -1,4 +1,5 @@
-'''You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
+'''
+You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
 
 Merge all the linked-lists into one sorted linked-list and return it.
 
@@ -23,7 +24,8 @@ Output: []
 Example 3:
 
 Input: lists = [[]]
-Output: []'''
+Output: []
+'''
 
 # Definition for singly-linked list.
 from typing import List, Optional
@@ -37,6 +39,9 @@ class ListNode:
 
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        # time complexity: O(nlogk)
+        # space complexity: O(1)
+
         if not lists or len(lists) == 0:
             return None
 
@@ -52,8 +57,10 @@ class Solution:
                 l2 = lists[i + 1] if (i + 1) < len(lists) else None
                 merged_list.append(self.mergeList(l1, l2))
             lists = merged_list
+        # return the last remaining linked list
         return lists[0]
 
+    # this is leetcode's merge two sorted lists (easy) problem at this point
     def mergeList(self, l1, l2):
         dummy = ListNode()
         tail = dummy
@@ -75,3 +82,4 @@ class Solution:
         return dummy.next
 
 
+s = Solution()
