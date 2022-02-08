@@ -40,7 +40,6 @@ class Solution:
                 return mid
 
             # now we need to check which portion of the array are we in... left or right
-
             if nums[l] <= nums[mid]:
                 # then we are in left sorted portion
                 if target > nums[mid] or target < nums[l]:
