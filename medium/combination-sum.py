@@ -54,9 +54,13 @@ class Solution:
                 # means no combination was found and we return
                 return
 
+            # we choose the current candidate
             cur.append(candidates[i])
+            # we add it to the total sum and check if we have reached target sum
             dfs(i, cur, total + candidates[i])
+            # we remove the current candidate from the total sum
             cur.pop()
+            # we try a different combination of candidates
             dfs(i + 1, cur, total)
 
         dfs(0, [], 0)
