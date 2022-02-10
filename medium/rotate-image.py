@@ -33,10 +33,14 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
+        # time complexity: O(n^2)
+        # space complexity: O(1)
+
         l, r = 0, len(matrix) - 1
 
         # we are doing the rotation anti clockwise because it requires only one temp variable
         while l < r:
+            # or from l to r - 1
             for i in range(r - l):
                 top, bottom = l, r
 
