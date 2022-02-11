@@ -33,6 +33,7 @@ class Solution:
 
         for s in strs:
             hashed = self.findHash(s)  # returns a sorted version of our string s
+            print(f"hashed: {hashed}")
             if hashed not in m:
                 m[hashed] = []
             m[hashed].append(s)
