@@ -25,16 +25,17 @@ from typing import List
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
+        # cant give it 0 as we have -ve values in the array
         max_sub = nums[0]
         cur_sum = 0
 
+        # the basic idea is anytime we get a -ve prefix we remove it as it contributes nothing
         for n in nums:
             if cur_sum < 0:
                 cur_sum = 0
             cur_sum += n
             max_sub = max(max_sub, cur_sum)
         return max_sub
-
 
 
 s = Solution()
