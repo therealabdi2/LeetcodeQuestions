@@ -25,21 +25,23 @@ class Solution:
         left, right = 0, len(matrix[0])
         top, bottom = 0, len(matrix)
 
+        # we are always going to start at the top left position
         while left < right and top < bottom:
             # go left to right and get every value in the top row
             for i in range(left, right):
                 res.append(matrix[top][i])
-            top += 1  # by inc we are shifting top down by 1
+            top += 1  # by inc we are shifting top to down by 1
 
             # get every value in the right column
             for i in range(top, bottom):
-                # right - 1 coz right is out of bounds
+                # right - 1 coz right is out of bounds and -1 will get us in bounds
                 res.append(matrix[i][right - 1])
-            right -= 1
+            right -= 1  # by dec we are shifting right to the left by 1
 
             # this specific condition is for e.g like [1,2,3] or [1,
             #                                                     2,
             #                                                     3]
+            # which does happen everytime we are at the end of the matrix
             if not (left < right and top < bottom):
                 break
 
@@ -48,10 +50,11 @@ class Solution:
             # right - 1 because it is out of bounds and left - 1 so it can be in range (python stuff)
             for i in range(right - 1, left - 1, -1):
                 res.append(matrix[bottom - 1][i])  # bottom - 1 because it is also out of bounds
-            # shift bottom upwards
-            bottom -= 1
+            bottom -= 1  # by dec we are shifting bottom to up by 1
 
             # get every value from left col (bottom to top)
+            # this is also where putting out bottom out of bounds initially comes in handy
+            # no need to check for left < right and top < bottom logic as putting bottom out of bounds handles it
             for i in range(bottom - 1, top - 1, -1):
                 res.append(matrix[i][left])
             left += 1
