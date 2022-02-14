@@ -24,6 +24,9 @@ from typing import List
 
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
+        # time complexity: O(n)
+        # space complexity: O(1)
+
         goal = len(nums) - 1
 
         for i in range(len(nums) - 1, -1, -1):
