@@ -23,8 +23,8 @@ class Solution:
         # time complexity O(nlogn) because we sorting,
         # n is the number of intervals given
 
-        intervals.sort(key=lambda i: i[0])  # i is the interval and we will use its first value to sort by
-        output = [intervals[0]]  # we are inserting the first interval to avoid and edge case
+        intervals.sort(key=lambda i: i[0])  # i is the interval and we will use its first value i[0] to sort by
+        output = [intervals[0]]  # we are inserting the first interval to avoid an edge case
 
         # we are not considering the first interval as we have already added to the output
         # start contains the first value and end contains the second value
@@ -33,6 +33,7 @@ class Solution:
             # this is also the reason we added the first interval (edge case)
             last_end = output[-1][1]
 
+            # true means intervals are overlapping
             if start <= last_end:
                 # we are taking max for cases like [1,5], [2,4], here 5 is larger so we dont merge with 4
                 output[-1][1] = max(last_end, end)
