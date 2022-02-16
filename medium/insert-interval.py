@@ -41,19 +41,30 @@ class Solution:
         res = []
 
         for i in range(len(intervals)):
+            # now we wanna take care of couple of edge cases
+            # 1. if end value of newInterval is less than start value of current interval
+            # then that means they arent overlapping and we add the newInterval to the result at the start
             if newInterval[1] < intervals[i][0]:
                 res.append(newInterval)
+                # after we append the newInterval to the result we can just return the result
+                # as other intervals are not overlapping with the newInterval
+                # this is the python way of doing it
+                # we are taking the intervals and appending it (+) to the result
                 return res + intervals[i:]
+            # 2. the other edge case is that this newInterval can come after the current interval
+            # in this case we just append the current interval since its not overlapping with newInterval
             elif newInterval[0] > intervals[i][1]:
                 res.append(intervals[i])
-                # we wont append the new interval yet because it could still overlap with other intervals
+                # we wont append the newInterval yet because it could still overlap with other intervals
             else:
                 # this condition is for overlapping with current interval
                 # in this case we merge it
+                # we take min of the left value of both the intervals, and max of the right value of both the intervals
                 newInterval = [min(newInterval[0], intervals[i][0]), max(newInterval[1], intervals[i][1])]
                 # we still dont append because this new interval could still overlap with other intervals on the right
 
-        # here we append just in case the first if condition doesnt execute
+        # here we append in case the first if condition doesn't execute
+        # hence the newInterval wont be added to the result
         res.append(newInterval)
         return res
 
