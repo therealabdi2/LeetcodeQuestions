@@ -57,15 +57,17 @@ class Solution2:
         # because it can only move right from that point
         # same goes for the right most column as all the cells can only move down hence only 1 unique path
 
-        # since we alreayd know the bottom row will be all 1's so we dont need to compute it
+        # since we already know the bottom row will be all 1's so we dont need to compute it
         row = [1] * n
 
         # go through all the rows except last row
         for i in range(m - 1):
+            # this new row will be the sum of the previous row and the right most column
             new_row = [1] * n
 
             # to avoid the edge case to check for out of bounds, go thorough all the columns except
             # right most column because like bottom row, it too is always gonna be 1
+            # we are going from right to left
             for j in range(n - 2, -1, -1):
                 # new_row[j+1] is the right value and the value below is the old row at index j
                 new_row[j] = new_row[j + 1] + row[j]
