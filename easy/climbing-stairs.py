@@ -37,9 +37,12 @@ class Solution:
 
 class Solution2:
     def climbStairs(self, n: int) -> int:
+        # time complexity: O(n)
+        # space complexity: O(1)
         # we are actually starting from the last stair case and working our way backwards
         one, two = 1, 1
 
+        # similar to fibonacci sequence
         for i in range(n - 1):
             # temp = one
             # one = one + two
