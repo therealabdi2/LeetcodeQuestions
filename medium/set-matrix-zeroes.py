@@ -27,11 +27,12 @@ class Solution:
         """
         # O(1) memory sol, o(n.m) time
         ROWS, COLS = len(matrix), len(matrix[0])
+
         # we dont need extra arrays but we need 1 extra var to tell if the first row is 0 or not
         row_zero = False
 
-        # determine which rows/columns need to be zeroed
-        # go through every row and column
+        # to determine which rows/columns need to be zeroed
+        # we go through every row and column
         for r in range(ROWS):
             for c in range(COLS):
                 if matrix[r][c] == 0:
@@ -39,6 +40,7 @@ class Solution:
                     matrix[0][c] = 0
 
                     # we need to set col pos to 0 as well, except we dont do this for top/left most position
+                    # for row 0, we already have a dedicated value to tell if the first row is zero
                     if r > 0:
                         matrix[r][0] = 0
                     else:
@@ -52,6 +54,7 @@ class Solution:
                 if matrix[0][c] == 0 or matrix[r][0] == 0:
                     matrix[r][c] = 0
 
+        # if origin of our matrix is zero, we need to set first row and col to zero
         if matrix[0][0] == 0:
             for r in range(ROWS):
                 # here we are zeroing out the first column of our matrix
