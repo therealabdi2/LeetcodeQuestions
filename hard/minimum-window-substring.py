@@ -30,6 +30,7 @@ Since the largest window of s only has one 'a', return empty string."
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
+        # handle the empty string edge case
         if t == "":
             return ""
 
@@ -38,7 +39,9 @@ class Solution:
         for c in t:
             count_t[c] = 1 + count_t.get(c, 0)  # if c does not exist it will return 0
 
+        # initialize the window
         have, need = 0, len(count_t)
+        # res will have left and right pointer and res_len is infinity because we want to find the smallest window
         res, res_len = [-1, -1], float("infinity")
         l = 0  # left pointer
 
@@ -47,6 +50,7 @@ class Solution:
             c = s[r]
             window[c] = 1 + window.get(c, 0)
 
+            # we need to check if c is even a character in t and they appear the same number of times
             if c in count_t and window[c] == count_t[c]:
                 have += 1
 
@@ -60,11 +64,22 @@ class Solution:
                 # because we need the smallest sub str
                 # so pop from the left of our window
                 window[s[l]] -= 1
+                # we need to check if s[l] is even a character in t meaning  if they are
+                # one of our characters that satisfy our needs
+                # and by removing if we made it less than what we needed
+                # then we need to decrement our have counter
                 if s[l] in count_t and window[s[l]] < count_t[s[l]]:
                     have -= 1
+                # shift the left pointer
                 l += 1
+                # then we check the have and need condition again
+                # we are taking character and adding it to our window map
+                # checking if the condition is met
+                # updating the window accordingly
+                # by the end if the result exists it will be stored in our res variable
 
         l, r = res
+        # if result does not exist res_len will be infinity and we will return empty string
         return s[l:r + 1] if res_len != float("infinity") else ""
 
 
