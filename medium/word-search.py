@@ -69,6 +69,7 @@ class Solution:
 
 class Solution2:
     def exist(self, board: List[List[str]], word: str) -> bool:
+        # time O(n * m * 4^n)
         ROWS, COLS = len(board), len(board[0])
 
         # we use a set because we can not reuse variables
@@ -79,9 +80,9 @@ class Solution2:
             if i == len(word):
                 return True
 
-            # for out of bounds
-            # word we are looking for isn't the word in board
-            # the word already exists in our path (r,c)
+            # 1st and 2nd conditions are for out of bounds
+            # 3rd condition is for if the word we are looking for isn't the word in board
+            # 4th condition is for if the word already exists in our path (r,c)
             if r < 0 or c < 0 or r >= ROWS or c >= COLS or word[i] != board[r][c] or (r, c) in path:
                 return False
             # this condition is reached only when we find the character we are looking for
@@ -89,6 +90,7 @@ class Solution2:
             # we are running dfs on all four adjacent cells
             # if any returns true then our result will return true
             res = dfs(r + 1, c, i + 1) or dfs(r - 1, c, i + 1) or dfs(r, c + 1, i + 1) or dfs(r, c - 1, i + 1)
+            # we remove the path from our set since we are no longer visiting that position
             path.remove((r, c))
             return res
 
@@ -98,8 +100,6 @@ class Solution2:
                 if dfs(r, c, 0):
                     return True
         return False
-
-    # time O(n * m * 4^n)
 
 
 s = Solution2()
