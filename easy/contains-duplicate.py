@@ -45,5 +45,17 @@ class Solution2:
         return False
 
 
+class Solution3:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        dict_num = {}
+        for num in nums:
+            if num in dict_num:
+                return True
+
+            if num not in dict_num:
+                dict_num[num] = num
+        return False
+
+
 s = Solution2()
 print(s.containsDuplicate([1, 2, 3, 4, 1]))
