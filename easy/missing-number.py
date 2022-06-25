@@ -45,5 +45,14 @@ class Solution:
         return int(missing)
 
 
+# slower but something the interviewer would expect
+class Solution2:
+    def missingNumber(self, nums: List[int]) -> int:
+        len_num = len(nums)
+        for num in range(len_num + 1):
+            if num not in nums:
+                return num
+
+
 s = Solution()
 print(s.missingNumber([3, 0, 1]))
