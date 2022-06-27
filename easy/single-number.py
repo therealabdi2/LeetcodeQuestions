@@ -21,6 +21,15 @@ from typing import List
 
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
+        # xor cancels out duplicates so we are only left with binary of unique value
+        res = 0
+        for n in nums:
+            res = n ^ res
+        return res
+
+
+class Solution2:
+    def singleNumber(self, nums: List[int]) -> int:
         return 2 * sum(set(nums)) - sum(nums)
 
 
