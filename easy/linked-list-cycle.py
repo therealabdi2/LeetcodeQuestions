@@ -53,3 +53,15 @@ class Solution:
             if hare == turtle:
                 return True
         return False
+
+class Solution2:
+    def hasCycle(self, head: ListNode) -> bool:
+        rabbit, turtle = head, head
+
+        while rabbit and rabbit.next:
+            turtle = turtle.next
+            rabbit = rabbit.next.next
+            if turtle == rabbit:
+                return True
+
+        return False
